@@ -1,0 +1,38 @@
+<h1>Employee Entry</h1>
+
+<h2>{{responseMsg}}</h2>
+
+<mat-grid-list cols="2" rowHeight="100px" gutterSize="10px" [formGroup]="employeeEntryForm">
+
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" color="accent">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" [(ngModel)]="employeeInfoObj.name">
+            <!-- <mat-error *ngIf="this.Name.invalid">{{getNameErrors()}}</mat-error> -->
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" color="accent">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobileNumber" [(ngModel)]="employeeInfoObj.mobileNumber">
+            <!-- <mat-error *ngIf="this.MobileNumber.invalid">{{getMobileNumberErrors()}}</mat-error> -->
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-form-field class="mat-form-field-reason" appearance="fill" color="accent">
+            <mat-label>Reason</mat-label>
+            <input matInput formControlName="reason" [(ngModel)]="employeeInfoObj.reason">
+            <!-- <mat-error *ngIf="this.Reason.invalid">{{getReasonErrors()}}</mat-error> -->
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2">
+        <button mat-flat-button color="accent" class="create-account-btn" (click)="onEmployeeEntry()"
+                [disabled]="employeeEntryForm.invalid">
+            Submit
+        </button>
+    </mat-grid-tile>
+
+</mat-grid-list>

@@ -1,0 +1,97 @@
+<mat-form-field appearance="outline" color="accent">
+    <mat-label>Search Material (Enter Material Description)</mat-label>
+    <input matInput (input)="search(searchField.value)" #searchField>
+    <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+    </button>
+</mat-form-field>
+
+<mat-card>
+    <mat-card-content>
+        <!-- <div>
+            Showing results for {{getBookCount()}} books
+        </div> -->
+        <div>
+            Showing results for {{getMaterialCount()}} materials
+        </div>
+        <div *ngIf="isAccessBlocked()">
+            You are Blocked, so you cannot order.
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-accordion multi="true">
+    <mat-expansion-panel expanded *ngFor="let list of materialsToDisplay">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{list.category | titlecase}}</mat-panel-title>
+            <mat-panel-description>{{list.subCategory | titlecase}}</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <table mat-table [dataSource]="list.materials">
+
+            <!-- Photo Column -->
+            <ng-container matColumnDef="driverPhoto">
+                <th mat-header-cell *matHeaderCellDef> Photo </th>
+                <td mat-cell *matCellDef="let element"> <img src={{element.photo}} onerror="this.src='assets/images/no_image.png'"/></td>
+            </ng-container>
+
+            <!-- Visitor Name Column -->
+            <ng-container matColumnDef="driverName">
+                <th mat-header-cell *matHeaderCellDef>Driver Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.driverName}} </td>
+            </ng-container>
+
+            <!-- Material Description Column -->
+            <ng-container matColumnDef="materialDescription">
+                <th mat-header-cell *matHeaderCellDef> Material Desc </th>
+                <td mat-cell *matCellDef="let element"> {{element.materialDescription}} </td>
+            </ng-container>
+
+            <!-- Material Documnent Column -->
+            <ng-container matColumnDef="materialDocument">
+                <th mat-header-cell *matHeaderCellDef> Document </th>
+                <td mat-cell *matCellDef="let element"> {{element.materialDocument}} </td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <!-- InTime Column -->
+            <ng-container matColumnDef="intime">
+                <th mat-header-cell *matHeaderCellDef> InTime </th>
+                <td mat-cell *matCellDef="let element"> {{element.inTime}} </td>
+            </ng-container>
+
+            <!-- OutTime Column -->
+            <ng-container matColumnDef="outtime">
+                <th mat-header-cell *matHeaderCellDef> OutTime </th>
+                <td mat-cell *matCellDef="let element"> {{element.outTime}} </td>
+            </ng-container>
+
+            <!-- Vehicle Number Column -->
+            <ng-container matColumnDef="vehicleNumber">
+                <th mat-header-cell *matHeaderCellDef>  Vehicle Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.vehicleNumber}} </td>
+            </ng-container>
+
+            <!-- Order Column -->
+             <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="accent"
+                            [disabled]="element.isOut || isAccessBlocked()"
+                            (click)="outMaterial(element)">
+                        
+                        Delivered
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-expansion-panel>
+</mat-accordion>
