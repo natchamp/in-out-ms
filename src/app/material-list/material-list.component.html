@@ -8,9 +8,6 @@
 
 <mat-card>
     <mat-card-content>
-        <!-- <div>
-            Showing results for {{getBookCount()}} books
-        </div> -->
         <div>
             Showing results for {{getMaterialCount()}} materials
         </div>
@@ -84,7 +81,6 @@
                     <button mat-raised-button color="accent"
                             [disabled]="element.isOut || isAccessBlocked()"
                             (click)="outMaterial(element)">
-                        
                         Delivered
                     </button>
                 </td>

@@ -11,6 +11,7 @@ import { VisitorComponent } from './visitor/visitor.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
 import { MaterialListComponent } from './material-list/material-list.component';
+import { MaterialEntryComponent } from './material-entry/material-entry.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'visitor/entry',
     component: VisitorComponent,
+    //canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'material/entry',
+    component: MaterialEntryComponent,
     //canActivate: [AuthenticationGuard],
   },
   {

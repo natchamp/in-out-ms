@@ -15,7 +15,7 @@ $light-theme: mat.define-light-theme(
   )
 );
 
-// Primary
+//primary
 $light-primary-50: mat.get-color-from-palette($light-primary, 50);
 $light-primary-100: mat.get-color-from-palette($light-primary, 100);
 $light-primary-200: mat.get-color-from-palette($light-primary, 200);
@@ -27,7 +27,7 @@ $light-primary-700: mat.get-color-from-palette($light-primary, 700);
 $light-primary-800: mat.get-color-from-palette($light-primary, 800);
 $light-primary-900: mat.get-color-from-palette($light-primary, 900);
 
-// Accent
+//accent
 $light-accent-50: mat.get-color-from-palette($light-accent, 50);
 $light-accent-100: mat.get-color-from-palette($light-accent, 100);
 $light-accent-200: mat.get-color-from-palette($light-accent, 200);
@@ -40,7 +40,7 @@ $light-accent-800: mat.get-color-from-palette($light-accent, 800);
 $light-accent-900: mat.get-color-from-palette($light-accent, 900);
 $light-accent-A200: mat.get-color-from-palette($light-accent, A200);
 
-// Warn
+//warn
 $light-warn-50: mat.get-color-from-palette($light-warn, 50);
 $light-warn-100: mat.get-color-from-palette($light-warn, 100);
 $light-warn-200: mat.get-color-from-palette($light-warn, 200);

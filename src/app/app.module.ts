@@ -30,6 +30,8 @@ import { VisitorComponent } from './visitor/visitor.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
 import { MaterialListComponent } from './material-list/material-list.component';
+import { MaterialEntryComponent } from './material-entry/material-entry.component';
+import { TestCameraComponent } from './test-camera/test-camera.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { MaterialListComponent } from './material-list/material-list.component';
     VisitorComponent,
     EmployeeListComponent,
     VisitorListComponent,
-    MaterialListComponent
+    MaterialListComponent,
+    MaterialEntryComponent,
+    TestCameraComponent
   ],
   imports: [
     BrowserModule,
