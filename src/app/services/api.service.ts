@@ -68,10 +68,10 @@ export class ApiService {
     let username = localStorage.getItem('username');
 
     if (!this.isLoggedInUser()){ 
-      return '--';
+      return 'Login First';
     }
     else
-      return username != null ? username:'--';
+      return username != null ? username:'Login First';
   }
 
   getTokenUserInfo(): User | null {

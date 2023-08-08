@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'employee/entry',
     component: EmployeeComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'home',
@@ -40,33 +40,28 @@ const routes: Routes = [
   {
     path: 'visitor/entry',
     component: VisitorComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'material/entry',
     component: MaterialEntryComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'employee/list',
     component: EmployeeListComponent,
-    //canActivate: [AuthorizationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'visitor/list',
     component: VisitorListComponent,
-    //canActivate: [AuthorizationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'material/list',
     component: MaterialListComponent,
-    //canActivate: [AuthorizationGuard],
+    canActivate: [AuthenticationGuard],
   },
-  // {
-  //   path: 'material/entry',
-  //   //component: MaterialEntryComponent,
-  //   //canActivate: [AuthorizationGuard],
-  // },
   {
     path: 'users/profile',
     component: ProfileComponent,
