@@ -111,6 +111,8 @@ filterEmployees(){
   }
 
   outEmployee(employee: Employee) {
+    const now = new Date();
+    employee.outTime=now.toLocaleTimeString();
     this.api.outEmployee(employee).subscribe({
       next: (res: any) => {
         if (res === 'Employee Out Successfully...') {

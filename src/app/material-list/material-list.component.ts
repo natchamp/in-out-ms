@@ -114,7 +114,9 @@ filterMaterials(){
   }
 
   outMaterial(material: Material) {
-    let userid = this.api.getTokenUserInfo()?.id ?? 0;
+    const now = new Date();
+    material.outTime=now.toLocaleTimeString();
+    //let userid = this.api.getTokenUserInfo()?.id ?? 0;
     this.api.outMaterial(material).subscribe({
       next: (res: any) => {
         if (res === 'Material Delivered Successfully...') {

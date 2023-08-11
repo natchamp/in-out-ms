@@ -517,7 +517,7 @@ label {
 }
 
 .w-input, .w-select {
-  width: 100%;
+  width: 300px;
   height: 38px;
   color: #333;
   vertical-align: middle;
@@ -726,6 +726,7 @@ textarea.w-input, textarea.w-select {
   content: " ";
   grid-area: 1 / 1 / 2 / 2;
   display: table;
+  width: 300px;
 }
 
 .w-row:after {
@@ -772,7 +773,8 @@ textarea.w-input, textarea.w-select {
 }
 
 .w-col-6 {
-  width: 33%;
+  width: 50%;
+  //width: 300px;
 }
 
 .w-col-7 {
@@ -4959,6 +4961,7 @@ figcaption {
     //width: 200px;
     //height: 200px;
     margin-left: 10px;
+    margin-top: 10px;
     border-radius: 10px;
     max-width: 200px;
     max-height: 200px;
@@ -4966,7 +4969,8 @@ figcaption {
 }
 .btn-danger{
   border-radius: 10px;
-  //margin: auto;
+  align-items: center;
+  margin-left: 40px;
 }
 
 .col-12{

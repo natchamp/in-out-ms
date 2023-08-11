@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<!-- This site was created in Webflow. https://www.webflow.com --><!-- Last Published: Mon Jul 24 2023 04:21:18 GMT+0000 (Coordinated Universal Time) -->
-<!-- <html data-wf-domain="inout-f24255.webflow.io" data-wf-page="64bd44f94bea106fb58830ce"
-    data-wf-site="64bd44f94bea106fb5883072"> -->
 <html>
 <body>
     <section class="wf-section">
         <h1 class="heading-2"><strong class="bold-text">Material Entry</strong></h1>
     </section>
-    <section class="section-2 wf-section"><img
-            src="https://uploads-ssl.webflow.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt=""
-            class="image-4" /></section>
+    
     <section class="wf-section">
         <div>
             <div clas="column-6 w-col w-col-6">
@@ -22,11 +17,11 @@
                             </div>
                             <div>
                                 <button class="btn-danger" (click)="getSnapshot()">
-                                    Capture Image
+                                    Capture Photo
                                 </button>
                             </div>
-                            <div class="col-12">
-                                <img [src]="webcamImage.imageAsDataUrl" />
+                            <div class="col-md-12">
+                                <img [src]="materialInfoObj.photo" />
                             </div>
                         </div>
                         <div class="column-6 w-col w-col-6">
@@ -36,27 +31,32 @@
                             <label for="whom-to-meet">Vehicle Number</label>
                             <input type="text" class="w-input" maxlength="256" name="whom-to-meet" data-name="whom-to-meet"
                                 placeholder="" id="whom-to-meet" [(ngModel)]="materialInfoObj.vehicleNumber" required="" />
-                            <label for="name-3">Date</label>
+                            <label for="extra-field">Material Document</label>
+                            <input type="file" class="w-input" maxlength="256" name="extra-field" data-name="extra-field"
+                                placeholder="" id="extra-field" required="" [(ngModel)]="materialInfoObj.materialDocument" />
+                            <!-- <label for="name-3">Date</label>
                             <input type="text" class="w-input" maxlength="256" name="date" data-name="date" placeholder=""
                                 [(ngModel)]="materialInfoObj.date" id="date" />
                             <label for="name-3">In Time</label>
                             <input type="text" class="w-input" maxlength="256" name="in-time" data-name="in-time"
-                                placeholder="" id="in-time" [(ngModel)]="materialInfoObj.inTime" />
+                                placeholder="" id="in-time" [(ngModel)]="materialInfoObj.inTime" /> -->
                         </div>
                         <div class="w-col w-col-6">
                             <label for="reason">Material Description</label>
-                            <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason"
-                                placeholder="" id="reason" [(ngModel)]="materialInfoObj.materialDescription" required="" />
+                            <!-- <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason"
+                                placeholder="" id="reason" [(ngModel)]="materialInfoObj.materialDescription" required="" /> -->
+                            <textarea rows="5" cols="50" class="w-input" maxlength="256" name="description" data-name="description"
+                            placeholder="" id="description" [(ngModel)]="materialInfoObj.materialDescription" required="" ></textarea>
                             <label for="mobile-number">Mobile Number</label>
                             <input type="text" class="w-input" maxlength="256" name="mobile-number"
                                 data-name="mobile-number" placeholder="" id="mobile-number"
                                 [(ngModel)]="materialInfoObj.mobileNumber" />
-                            <label for="extra-field">Material Document</label>
+                            <!-- <label for="extra-field">Material Document</label>
                             <input type="file" class="w-input" maxlength="256" name="extra-field" data-name="extra-field"
-                                placeholder="" id="extra-field" required="" [(ngModel)]="materialInfoObj.materialDocument" />
-                            <label for="out-time">OutTime</label>
+                                placeholder="" id="extra-field" required="" [(ngModel)]="materialInfoObj.materialDocument" /> -->
+                            <!-- <label for="out-time">OutTime</label>
                             <input type="text" class="w-input" maxlength="256" name="out-time" data-name="out-time"
-                                placeholder="" id="out-time" required="" [(ngModel)]="materialInfoObj.outTime" />
+                                placeholder="" id="out-time" required="" [(ngModel)]="materialInfoObj.outTime" /> -->
                         </div>
                     </div>
                     <!-- <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"

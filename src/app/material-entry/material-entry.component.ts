@@ -43,7 +43,10 @@ export class MaterialEntryComponent {
     const now = new Date();
     this.submitClicked=false;
     console.log(JSON.stringify(this.materialInfoObj));
-    this.materialInfoObj.inTime=now.toLocaleString();
+    //this.materialInfoObj.inTime=now.toLocaleString();
+    this.materialInfoObj.inTime=now.toLocaleTimeString();
+    this.materialInfoObj.date = now.toUTCString().substring(5,16);
+    console.log("Date = "+this.materialInfoObj.date);
     console.log("In Time = "+this.materialInfoObj.inTime);
       this.httpClient.post(this.backendService, this.materialInfoObj).subscribe((data:any)=>{console.log(" Material Added/n----", data)});
       alert("Material Added Successfully.....");

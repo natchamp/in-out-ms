@@ -40,50 +40,13 @@ export class VisitorComponent implements OnInit{
     const now = new Date();
     this.submitClicked= false;
       console.log(JSON.stringify(this.visitorInfoObj));
-      this.visitorInfoObj.inTime= now.toLocaleString();
+      this.visitorInfoObj.inTime=now.toLocaleTimeString();
+    this.visitorInfoObj.date = now.toUTCString().substring(5,16);
     console.log("In Time = "+this.visitorInfoObj.inTime);
       this.httpClient.post(this.backendService, this.visitorInfoObj).subscribe((data:any)=>{console.log(" Visitor Added/n----", data)});
       alert("Visitor Added Successfully.....");
-      /*const response = fetch(this.backendService, {
-        method: 'POST',
-        body: JSON.stringify(this.visitorInfoObj),
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-});*/
-      //console.log('Visitor Added', response)
-      //this.httpClient.get('http://localhost:4000/visitor/1').subscribe((data: any)=>{console.log("Get Visitor", data)})
-
-      //console.log("Get Visitor", resp)
 
   }
-/*
-  videoHeight = 200;
-  videoWidth = 200;
-  videoSrc!: string;
-  canvasTransform = '';
-  videoTransform = '';
-  image!: string | null;
-
-  async captureImage() {
-    const video = document.querySelector('video') as HTMLVideoElement;
-    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-    canvas.width = this.videoWidth;
-    canvas.height = this.videoHeight;
-
-    canvas.getContext('2d')?.drawImage(video, 0, 0, this.videoWidth, this.videoHeight);
-    this.image = canvas.toDataURL('image/jpeg'); // Base64 encoded image data
-  }
-
-  async uploadImage() {
-    if (!this.image) {
-      console.error('No image captured yet!');
-      return;
-    }
-  }
-*/
-
 //--------------------------------------
 private trigger: Subject<any> = new Subject();
   public webcamImage!: WebcamImage;

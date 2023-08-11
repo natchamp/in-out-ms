@@ -1,16 +1,9 @@
 <!DOCTYPE html>
-<!-- <html data-wf-domain="inout-f24255.webflow.io" data-wf-page="64bd44f94bea106fb58830ce"
-    data-wf-site="64bd44f94bea106fb5883072"> -->
-
 <html>
 <body>
-
     <section class="wf-section">
         <h1 class="heading-2"><strong class="bold-text">Employee Entry</strong></h1>
     </section>
-    <section class="section-2 wf-section"><img
-            src="https://uploads-ssl.webflow.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt=""
-            class="image-4" /></section>
     
     <section class="wf-section" id="htmlData">
         <div>
@@ -24,11 +17,12 @@
                             </div>
                             <div>
                                 <button class="btn-danger" (click)="getSnapshot()">
-                                    Capture Image
+                                    Capture Photo
                                 </button>
                             </div>
-                            <div class="col-12">
-                                <img [src]="webcamImage.imageAsDataUrl" />
+                            <div class="col-md-12">
+                                <!-- <img [src]="webcamImage.imageAsDataUrl" /> -->
+                                <img [src]="employeeInfoObj.photo" />
                             </div>
                         </div>
                         <div class="column-6 w-col w-col-6">
@@ -38,14 +32,7 @@
                             <label for="whom-to-meet">Extra Field</label>
                             <input type="text" required="" class="w-input" maxlength="256" name="whom-to-meet" data-name="whom-to-meet"
                                 placeholder="" id="whom-to-meet" [(ngModel)]="employeeInfoObj.whomToMeet"/>
-                            <label for="name-3">Date</label>
-                            <input type="text" class="w-input" maxlength="256" name="date" data-name="date" placeholder=""
-                                [(ngModel)]="employeeInfoObj.date" id="date" required />
-                            <label for="name-3">In Time</label>
-                            <input type="text" class="w-input" maxlength="256" name="in-time" data-name="in-time"
-                                placeholder="" id="in-time" [(ngModel)]="employeeInfoObj.inTime" required/>
-                        </div>
-                        <div class="w-col w-col-6">
+
                             <label for="reason">Reason</label>
                             <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason"
                                 placeholder="" id="reason" [(ngModel)]="employeeInfoObj.reason" required="" />
@@ -53,12 +40,29 @@
                             <input type="text" class="w-input" maxlength="256" name="mobile-number"
                                 data-name="mobile-number" placeholder="" id="mobile-number"
                                 [(ngModel)]="employeeInfoObj.mobileNumber" />
-                            <label for="extra-field">Extra Field</label>
+
+
+                            <!-- <label for="name-3">Date</label>
+                            <input type="text" class="w-input" maxlength="256" name="date" data-name="date" placeholder=""
+                                [(ngModel)]="employeeInfoObj.date" id="date" required />
+                            <label for="name-3">In Time</label>
+                            <input type="text" class="w-input" maxlength="256" name="in-time" data-name="in-time"
+                                placeholder="" id="in-time" [(ngModel)]="employeeInfoObj.inTime" required/> -->
+                        </div>
+                        <div class="w-col w-col-6">
+                            <!-- <label for="reason">Reason</label>
+                            <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason"
+                                placeholder="" id="reason" [(ngModel)]="employeeInfoObj.reason" required="" />
+                            <label for="mobile-number">Mobile Number</label>
+                            <input type="text" class="w-input" maxlength="256" name="mobile-number"
+                                data-name="mobile-number" placeholder="" id="mobile-number"
+                                [(ngModel)]="employeeInfoObj.mobileNumber" /> -->
+                            <!-- <label for="extra-field">Extra Field</label>
                             <input type="file" class="w-input" maxlength="256" name="extra-field" data-name="extra-field"
                                 placeholder="" id="extra-field" required="" [(ngModel)]="employeeInfoObj.extra" />
                             <label for="out-time">OutTime</label>
                             <input type="text" class="w-input" maxlength="256" name="out-time" data-name="out-time"
-                                placeholder="" id="out-time" required="" [(ngModel)]="employeeInfoObj.outTime" />
+                                placeholder="" id="out-time" required="" [(ngModel)]="employeeInfoObj.outTime" /> -->
                         </div>
                     </div>
                     <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"

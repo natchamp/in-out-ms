@@ -120,7 +120,8 @@ export class EmployeeComponent implements OnInit {
     const now = new Date();
     this.submitClicked=false;
     console.log(JSON.stringify(this.employeeInfoObj));
-    this.employeeInfoObj.inTime=now.toLocaleString();
+    this.employeeInfoObj.inTime=now.toLocaleTimeString();
+    this.employeeInfoObj.date = now.toUTCString().substring(5,16);
     console.log("In Time = "+this.employeeInfoObj.inTime);
     this.httpClient.post(this.backendService, this.employeeInfoObj).subscribe((data:any)=>{console.log(" Employee Added/n----", data)});
     alert("Employee Added Successfully.....");
@@ -157,6 +158,7 @@ export class EmployeeComponent implements OnInit {
         ['Employee Name', this.employeeInfoObj.name],
         ['Reason', this.employeeInfoObj.reason],
         ['Mobile', this.employeeInfoObj.mobileNumber],
+        ['Date', this.employeeInfoObj.date],
         ['InTime', this.employeeInfoObj.inTime],
         ['OutTime', this.employeeInfoObj.outTime]
         // Add more items here

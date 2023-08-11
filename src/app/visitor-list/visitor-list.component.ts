@@ -116,7 +116,9 @@ filterVisitors(){
   }
 
   outVisitor(visitor: Visitor) {
-    let userid = this.api.getTokenUserInfo()?.id ?? 0;
+    const now = new Date();
+    visitor.outTime=now.toLocaleTimeString();
+    //let userid = this.api.getTokenUserInfo()?.id ?? 0;
     this.api.outVisitor(visitor).subscribe({
       next: (res: any) => {
         if (res === 'Visitor Out Successfully...') {
