@@ -8,7 +8,7 @@
     <section class="wf-section">
         <div>
             <div clas="column-6 w-col w-col-6">
-                <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2"
+                <form [formGroup]="visitorEntryForm" id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2"
                     data-wf-page-id="64bd44f94bea106fb58830ce" data-wf-element-id="65a79274-1754-a00a-65f4-ac8be727c873">
                     <div class="w-row">
                         <div class="column-6 w-col w-col-6">
@@ -27,17 +27,41 @@
                         </div>
                         <div class="column-6 w-col w-col-6">
                             <label for="name">Name</label>
-                            <input type="text" class="w-input" maxlength="256" name="name" placeholder="" id="name"
+                            <input type="text" class="w-input" maxlength="256" name="name" placeholder="" id="name" formControlName="name" 
                                 [(ngModel)]="visitorInfoObj.name" />
+                            <div class="field-error" *ngIf="visitorEntryForm.get('name')?.invalid && (visitorEntryForm.get('name')?.dirty || visitorEntryForm.get('name')?.touched)">
+                                <div *ngIf="visitorEntryForm.get('name')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="visitorEntryForm.get('name')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+
                             <label for="whom-to-meet">Whom to Meet</label>
                             <input type="text" class="w-input" maxlength="256" name="whom-to-meet" data-name="whom-to-meet"
-                                placeholder="" id="whom-to-meet" [(ngModel)]="visitorInfoObj.whomToMeet" required="" />
+                                placeholder="" id="whom-to-meet" formControlName="whomToMeet"  [(ngModel)]="visitorInfoObj.whomToMeet" required="" />
+                            <div class="field-error" *ngIf="visitorEntryForm.get('whomToMeet')?.invalid && (visitorEntryForm.get('whomToMeet')?.dirty || visitorEntryForm.get('whomToMeet')?.touched)">
+                                <div *ngIf="visitorEntryForm.get('whomToMeet')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="visitorEntryForm.get('whomToMeet')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+
                             <label for="reason">Reason</label>
                             <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason" placeholder="" id="reason"
-                                [(ngModel)]="visitorInfoObj.reason" required="" />
+                            formControlName="reason" [(ngModel)]="visitorInfoObj.reason" required="" />
+                            <div class="field-error" *ngIf="visitorEntryForm.get('reason')?.invalid && (visitorEntryForm.get('reason')?.dirty || visitorEntryForm.get('reason')?.touched)">
+                                <div *ngIf="visitorEntryForm.get('reason')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="visitorEntryForm.get('reason')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+                            
                             <label for="mobile-number">Mobile Number</label>
                             <input type="text" class="w-input" maxlength="256" name="mobile-number" data-name="mobile-number" placeholder=""
-                                id="mobile-number" [(ngModel)]="visitorInfoObj.mobile" />
+                                id="mobile-number" formControlName="mobile"  [(ngModel)]="visitorInfoObj.mobileNumber" />
+                            <div class="field-error" *ngIf="visitorEntryForm.get('mobile')?.invalid && (visitorEntryForm.get('mobile')?.dirty || visitorEntryForm.get('mobile')?.touched)">
+                                <div *ngIf="visitorEntryForm.get('mobile')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="visitorEntryForm.get('mobile')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+
                             <!-- <label for="name-3">Date</label>
                             <input type="text" class="w-input" maxlength="256" name="date" data-name="date" placeholder=""
                                 [(ngModel)]="visitorInfoObj.date" id="date" />
@@ -61,7 +85,7 @@
                                 placeholder="" id="out-time" required="" [(ngModel)]="visitorInfoObj.outTime" /> -->
                         </div>
                     </div>
-                    <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"
+                    <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button" [disabled]="visitorEntryForm.invalid"
                         (click)="onVisitorEntry()" />
                     <button class="submit-button w-button" [disabled]="submitClicked" (click)="generatePDF()">Generate PDF</button>
                 </form>

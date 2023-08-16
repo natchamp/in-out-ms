@@ -18,7 +18,8 @@ export class EmployeeListComponent {
     "date",
     'intime',
     'outtime',
-    'action'
+    'action',
+    'delete'
   ];
 
   constructor(private api: ApiService) {}
@@ -126,6 +127,23 @@ filterEmployees(){
 
     this.filterEmployees();
     location.reload()
+  }
+
+  deleteEmployee(employee:Employee){
+
+    const response = confirm("Are you Sure you want to delete Employee Record - Name : "+employee.name);
+
+    if(response){
+    console.log("Deleting Employee = "+employee.name);
+    this.api.deleteEmployee(employee).subscribe({
+      next: data => {
+          
+      },
+  });
+    alert("Employee Record Deleted Successfully...");
+    this.filterEmployees();
+    location.reload()
+  }
   }
 
   isAccessBlocked() {

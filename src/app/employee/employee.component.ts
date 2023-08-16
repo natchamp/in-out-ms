@@ -56,18 +56,17 @@ export class EmployeeComponent implements OnInit {
   constructor(httpClient: HttpClient,private fb: FormBuilder, private api: ApiService){
     this.httpClient=httpClient
 
-    this.employeeEntryForm = fb.group(
-      {
-        firstName: fb.control('', [Validators.required]),
-        lastName: fb.control('', [Validators.required]),
-        email: fb.control('', [Validators.required, Validators.email]),
-        password: fb.control('', [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(15),
-        ]),
-      } as AbstractControlOptions
-    );
+      this.employeeEntryForm = this.fb.group({
+        name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+        reason: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+        mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      });
+
+    // this.employeeEntryForm = this.fb.group({
+    //   name: ['', [Validators.required, Validators.pattern('[a-zA-Z\s\'-]+')]],
+    //   mobile: ['', [Validators.required, Validators.pattern('[+]?[0-9]+')]]
+    // });
+
    }
 
 
@@ -105,6 +104,29 @@ export class EmployeeComponent implements OnInit {
     return '';
   }
 
+fullNameValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+
+    if (!value) {
+      return null; // No error if the field is empty
+    }
+
+    // Split the full name into parts (first name and last name)
+    const parts = value.split(' ');
+
+    // Check if there are at least two parts (first name and last name)
+    if (parts.length < 2) {
+      return { fullName: true, message: 'Please enter a valid full name.' };
+    }
+
+    return null;
+  };
+}
+
+
+
+
   get Name(): FormControl {
     return this.employeeEntryForm.get('name') as FormControl;
   }
@@ -139,7 +161,7 @@ export class EmployeeComponent implements OnInit {
   
     generatePDF() {
       const pdf = new jsPDF();
-      
+    
       // Add text to PDF
       //pdf.text('Hello, this is some text!', 10, 10);
       const companyLogo = 'assets/images/logo.jpg';
@@ -189,6 +211,59 @@ export class EmployeeComponent implements OnInit {
     
     
   }
+
+
+  generateA6PDF(){
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: [105, 148], // A6 dimensions in millimeters (width x height)
+    });
+    
+      // Add text to PDF
+      //pdf.text('Hello, this is some text!', 10, 10);
+      const companyLogo = 'assets/images/logo.jpg';
+      pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+      pdf.setFontSize(10);
+      //pdf.setFont('bold');
+      pdf.text('Employee Info', 40, 30);
+
+
+      // Add an image to PDF
+      const imageUrl = 'assets/images/employee.png';
+      //pdf.addImage(imageUrl, 'JPEG', 55, 50, 100, 100); // Parameters: image, format, x, y, width, height
+      pdf.addImage(this.employeeInfoObj.photo, 'JPEG', 35, 35, 40, 40); // Parameters: image, format, x, y, width, height
+
+      const items = [
+        ['Employee Name', this.employeeInfoObj.name],
+        ['Reason', this.employeeInfoObj.reason],
+        ['Mobile', this.employeeInfoObj.mobileNumber],
+        ['Date', this.employeeInfoObj.date],
+        ['InTime', this.employeeInfoObj.inTime],
+        ['OutTime', this.employeeInfoObj.outTime]
+        // Add more items here
+      ];
+
+      pdf.setFontSize(8);
+      autoTable(pdf, {
+       columnStyles: { 0: { fontSize: 8 } }, 
+       styles: {fontSize:8},
+        margin: { top: 80 },
+        body: items,
+
+      })
+      
+      pdf.setFontSize(8)
+      pdf.text('**Note - This is an auto generated pass', 30, 130);
+      pdf.text('       *** Do not lose this pass ***',30,135)
+      pdf.output('dataurlnewwindow');
+      //pdf.autoPrint()
+      //pdf.save('generated-pdf.pdf');
+    
+    
+  }
+
+  
 
   showButton()
   {

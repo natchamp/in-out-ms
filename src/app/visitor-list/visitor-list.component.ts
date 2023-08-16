@@ -23,7 +23,8 @@ export class VisitorListComponent {
     "date",
     'intime',
     'outtime',
-    'action'
+    'action',
+    'delete'
   ];
 
   constructor(private api: ApiService) {}
@@ -133,6 +134,25 @@ filterVisitors(){
     this.filterVisitors();
     location.reload()
   }
+
+
+  deleteVisitor(visitor:Visitor){
+
+    const response = confirm("Are you Sure you want to delete Visitor Record - Name : "+visitor.name);
+
+    if(response){
+    console.log("Deleting Visitor = "+visitor.name);
+    this.api.deleteVisitor(visitor).subscribe({
+      next: data => {
+          
+      },
+  });
+    alert("Visitor Record Deleted Successfully...");
+    this.filterVisitors();
+    location.reload()
+  }
+  }
+
 
   isBlocked() {
     let blocked = this.api.getTokenUserInfo()?.blocked ?? true;

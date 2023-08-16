@@ -8,7 +8,7 @@
     <section class="wf-section">
         <div>
             <div clas="column-6 w-col w-col-6">
-                <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2"
+                <form [formGroup]="materialEntryForm" id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2"
                     data-wf-page-id="64bd44f94bea106fb58830ce" data-wf-element-id="65a79274-1754-a00a-65f4-ac8be727c873">
                     <div class="w-row">
                         <div class="column-6 w-col w-col-6 cam-sec">
@@ -26,14 +26,33 @@
                         </div>
                         <div class="column-6 w-col w-col-6">
                             <label for="name">Driver Name</label>
-                            <input type="text" class="w-input" maxlength="256" name="name" placeholder="" id="name"
+                            <input type="text" class="w-input" maxlength="256" name="name" placeholder="" id="name" formControlName="name"
                                 [(ngModel)]="materialInfoObj.driverName" />
-                            <label for="whom-to-meet">Vehicle Number</label>
-                            <input type="text" class="w-input" maxlength="256" name="whom-to-meet" data-name="whom-to-meet"
-                                placeholder="" id="whom-to-meet" [(ngModel)]="materialInfoObj.vehicleNumber" required="" />
-                            <label for="extra-field">Material Document</label>
-                            <input type="file" class="w-input" maxlength="256" name="extra-field" data-name="extra-field"
-                                placeholder="" id="extra-field" required="" [(ngModel)]="materialInfoObj.materialDocument" />
+                            <div class="field-error" *ngIf="materialEntryForm.get('name')?.invalid && (materialEntryForm.get('name')?.dirty || materialEntryForm.get('name')?.touched)">
+                                <div *ngIf="materialEntryForm.get('name')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="materialEntryForm.get('name')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+
+
+                            <label for="vehicle">Vehicle Number</label>
+                            <input type="text" class="w-input" maxlength="256" name="vehicle" data-name="vehicle"
+                                placeholder="" id="vehicle" formControlName="vehicle" [(ngModel)]="materialInfoObj.vehicleNumber" required="" />
+                            <div class="field-error" *ngIf="materialEntryForm.get('vehicle')?.invalid && (materialEntryForm.get('vehicle')?.dirty || materialEntryForm.get('vehicle')?.touched)">
+                                <div *ngIf="materialEntryForm.get('vehicle')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="materialEntryForm.get('vehicle')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+                            
+                            <label for="materialDoc">Material Document</label>
+                            <input type="file" class="w-input" maxlength="256" name="materialDoc" data-name="materialDoc"
+                                placeholder="" id="materialDoc" required="" formControlName="materialDoc" [(ngModel)]="materialInfoObj.materialDocument" />
+                            <div class="field-error" *ngIf="materialEntryForm.get('materialDoc')?.invalid && (materialEntryForm.get('materialDoc')?.dirty || materialEntryForm.get('materialDoc')?.touched)">
+                                <div *ngIf="materialEntryForm.get('materialDoc')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="materialEntryForm.get('materialDoc')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+                            
                             <!-- <label for="name-3">Date</label>
                             <input type="text" class="w-input" maxlength="256" name="date" data-name="date" placeholder=""
                                 [(ngModel)]="materialInfoObj.date" id="date" />
@@ -46,12 +65,25 @@
                             <!-- <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason"
                                 placeholder="" id="reason" [(ngModel)]="materialInfoObj.materialDescription" required="" /> -->
                             <textarea rows="5" cols="50" class="w-input" maxlength="256" name="description" data-name="description"
-                            placeholder="" id="description" [(ngModel)]="materialInfoObj.materialDescription" required="" ></textarea>
+                            placeholder="" id="description" formControlName="materialDesc" [(ngModel)]="materialInfoObj.materialDescription" required="" ></textarea>
+                            <div class="field-error" *ngIf="materialEntryForm.get('materialDesc')?.invalid && (materialEntryForm.get('materialDesc')?.dirty || materialEntryForm.get('materialDesc')?.touched)">
+                                <div *ngIf="materialEntryForm.get('materialDesc')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="materialEntryForm.get('materialDesc')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
+                            
+                            
                             <label for="mobile-number">Mobile Number</label>
                             <input type="text" class="w-input" maxlength="256" name="mobile-number"
-                                data-name="mobile-number" placeholder="" id="mobile-number"
+                                data-name="mobile-number" placeholder="" id="mobile-number" formControlName="mobile"
                                 [(ngModel)]="materialInfoObj.mobileNumber" />
-                            <!-- <label for="extra-field">Material Document</label>
+                                <div class="field-error" *ngIf="materialEntryForm.get('mobile')?.invalid && (materialEntryForm.get('mobile')?.dirty || materialEntryForm.get('mobile')?.touched)">
+                                    <div *ngIf="materialEntryForm.get('mobile')?.hasError('required')">This field is required.</div>
+                                    <div *ngIf="materialEntryForm.get('mobile')?.hasError('pattern')">Invalid format.</div>
+                                    <!-- Add more error conditions as needed -->
+                                </div>
+                            
+                                <!-- <label for="extra-field">Material Document</label>
                             <input type="file" class="w-input" maxlength="256" name="extra-field" data-name="extra-field"
                                 placeholder="" id="extra-field" required="" [(ngModel)]="materialInfoObj.materialDocument" /> -->
                             <!-- <label for="out-time">OutTime</label>
@@ -61,7 +93,7 @@
                     </div>
                     <!-- <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"
                         (click)="onVisitorEntry()" /> -->
-                        <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"
+                        <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button" [disabled]="materialEntryForm.invalid"
                         (click)="onMaterialEntry()"/>
                     <button class="submit-button w-button" [disabled]="submitClicked" (click)="generatePDF()">Generate PDF</button>
                 </form>

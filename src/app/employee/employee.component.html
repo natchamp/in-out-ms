@@ -8,7 +8,7 @@
     <section class="wf-section" id="htmlData">
         <div>
             <div clas="column-6 w-col w-col-6">
-                <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2"
+                <form [formGroup]="employeeEntryForm" id="email-form" name="email-form" data-name="Email Form" method="get" class="form-2"
                     data-wf-page-id="64bd44f94bea106fb58830ce" data-wf-element-id="65a79274-1754-a00a-65f4-ac8be727c873">
                     <div class="w-row">
                         <div class="column-6 w-col w-col-6 cam-sec">
@@ -27,19 +27,37 @@
                         </div>
                         <div class="column-6 w-col w-col-6">
                             <label for="name">Employee Name</label>
-                            <input type="text" required="" class="w-input" maxlength="256" name="name" placeholder="Name" id="name"
+                            <input type="text" required="" class="w-input" maxlength="256" name="name" placeholder="Name" id="name" formControlName="name"
                                 [(ngModel)]="employeeInfoObj.name" />
-                            <label for="whom-to-meet">Extra Field</label>
+
+                                <div class="field-error" *ngIf="employeeEntryForm.get('name')?.invalid && (employeeEntryForm.get('name')?.dirty || employeeEntryForm.get('name')?.touched)">
+                                    <div *ngIf="employeeEntryForm.get('name')?.hasError('required')">This field is required.</div>
+                                    <div *ngIf="employeeEntryForm.get('name')?.hasError('pattern')">Invalid format.</div>
+                                    <!-- Add more error conditions as needed -->
+                                </div>
+
+                        
+                            <!-- <label for="whom-to-meet">Extra Field</label>
                             <input type="text" required="" class="w-input" maxlength="256" name="whom-to-meet" data-name="whom-to-meet"
-                                placeholder="" id="whom-to-meet" [(ngModel)]="employeeInfoObj.whomToMeet"/>
+                                placeholder="" id="whom-to-meet" [(ngModel)]="employeeInfoObj.whomToMeet"/> -->
 
                             <label for="reason">Reason</label>
                             <input type="text" class="w-input" maxlength="256" name="reason" data-name="reason"
-                                placeholder="" id="reason" [(ngModel)]="employeeInfoObj.reason" required="" />
+                                placeholder="" id="reason" [(ngModel)]="employeeInfoObj.reason" formControlName="reason" />
+                            <div class="field-error" *ngIf="employeeEntryForm.get('reason')?.invalid && (employeeEntryForm.get('reason')?.dirty || employeeEntryForm.get('reason')?.touched)">
+                                <div *ngIf="employeeEntryForm.get('reason')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="employeeEntryForm.get('reason')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
                             <label for="mobile-number">Mobile Number</label>
                             <input type="text" class="w-input" maxlength="256" name="mobile-number"
-                                data-name="mobile-number" placeholder="" id="mobile-number"
+                                data-name="mobile-number" placeholder="" id="mobile-number" formControlName="mobile"
                                 [(ngModel)]="employeeInfoObj.mobileNumber" />
+                            <div class="field-error" *ngIf="employeeEntryForm.get('mobile')?.invalid && (employeeEntryForm.get('mobile')?.dirty || employeeEntryForm.get('mobile')?.touched)">
+                                <div *ngIf="employeeEntryForm.get('mobile')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="employeeEntryForm.get('mobile')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
 
 
                             <!-- <label for="name-3">Date</label>
@@ -65,9 +83,9 @@
                                 placeholder="" id="out-time" required="" [(ngModel)]="employeeInfoObj.outTime" /> -->
                         </div>
                     </div>
-                    <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"
+                    <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button" [disabled]="employeeEntryForm.invalid"
                         (click)="onEmployeeEntry()" />
-                    <button class="submit-button w-button" [disabled]="submitClicked" (click)="generatePDF()">Generate PDF</button>
+                    <button class="submit-button w-button" [disabled]="submitClicked" (click)="generateA6PDF()">Generate PDF</button>
                 </form>
                 <div class="w-form-done">
                     <div>Thank you! Your submission has been received!</div>

@@ -5,6 +5,16 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { OnInit, ViewChild, ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import {
+  AbstractControl,
+  AbstractControlOptions,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 
 @Component({
@@ -19,6 +29,7 @@ export class MaterialEntryComponent {
 
   private httpClient: HttpClient
   submitClicked:boolean = true;
+  materialEntryForm: FormGroup;
   materialInfoObj:any={
     driverName:'',
     vehicleNumber:'',
@@ -33,8 +44,16 @@ export class MaterialEntryComponent {
     //extra:''
   }
 
-  constructor(httpClient: HttpClient){
+  constructor(httpClient: HttpClient, private fb: FormBuilder){
     this.httpClient=httpClient
+
+    this.materialEntryForm = this.fb.group({
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      vehicle: ['', [Validators.required, Validators.pattern('^[A-Z]{2} [0-9]{2} [A-Z]{2} [0-9]{4}$')]],
+      materialDoc: ['', [Validators.required]],
+      materialDesc: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+    });
    }
 
   //ngOnInit():void{}

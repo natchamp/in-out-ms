@@ -21,7 +21,8 @@ export class MaterialListComponent {
     "date",
     'intime',
     'outtime',
-    'action'
+    'action',
+    'delete'
   ];
 
   constructor(private api: ApiService) {}
@@ -131,6 +132,24 @@ filterMaterials(){
     this.filterMaterials();
     location.reload()
   }
+
+  deleteMaterial(material:Material){
+
+    const response = confirm("Are you Sure you want to delete Material Record - Name : "+material.driverName);
+
+    if(response){
+    console.log("Deleting Material = "+material.driverName);
+    this.api.deleteMaterial(material).subscribe({
+      next: data => {
+          
+      },
+  });
+    alert("Material Record Deleted Successfully...");
+    this.filterMaterials();
+    location.reload()
+  }
+  }
+
 
   isBlocked() {
     let blocked = this.api.getTokenUserInfo()?.blocked ?? true;

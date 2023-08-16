@@ -139,6 +139,30 @@ export class ApiService {
 
   }
 
+  deleteEmployee(employee: Employee) {
+    let options = {
+      body: employee,
+    };
+      return this.http.delete(this.baseUrl + "/employee/remove", options);
+
+  }
+
+  deleteVisitor(visitor: Visitor) {
+    let options = {
+      body: visitor,
+    };
+      return this.http.delete(this.baseUrl + "/visitor/remove", options);
+
+  }
+
+  deleteMaterial(material: Material) {
+    let options = {
+      body: material,
+    };
+      return this.http.delete(this.baseUrl + "/material/remove", options);
+
+  }
+
   getOrdersOfUser(userid: number) {
     return this.http.get<Order[]>(this.baseUrl + 'GetOrders/' + userid);
   }

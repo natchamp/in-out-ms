@@ -5,6 +5,16 @@ import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { OnInit, ViewChild, ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import {
+  AbstractControl,
+  AbstractControlOptions,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'visitor',
@@ -16,6 +26,7 @@ export class VisitorComponent implements OnInit{
   public readonly backendService : string = 'http://localhost:4000/visitor/new'
 
   private httpClient: HttpClient
+  visitorEntryForm: FormGroup;
   submitClicked:boolean = true;
   visitorInfoObj:any={
     name:'',
@@ -30,8 +41,16 @@ export class VisitorComponent implements OnInit{
     //extra:''
   }
 
-  constructor(httpClient: HttpClient){
+  constructor(httpClient: HttpClient, private fb: FormBuilder){
     this.httpClient=httpClient
+
+    this.visitorEntryForm = this.fb.group({
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      reason: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      whomToMeet: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+    });
+
    }
 
   //ngOnInit():void{}
@@ -90,7 +109,7 @@ private trigger: Subject<any> = new Subject();
     pdf.addImage(this.visitorInfoObj.photo, 'JPEG', 60, 60, 80, 80); // Parameters: image, format, x, y, width, height
 
     const items = [
-      ['Employee Name', this.visitorInfoObj.name],
+      ['Visitor Name', this.visitorInfoObj.name],
       ['Whom To Meet', this.visitorInfoObj.whomToMeet],
       ['Reason', this.visitorInfoObj.reason],
       ['Mobile', this.visitorInfoObj.mobileNumber],
@@ -101,8 +120,6 @@ private trigger: Subject<any> = new Subject();
 
 
     autoTable(pdf, {
-      //head: [['ID', 'ID']],
-     // columnStyles: { 0: { halign: 'center' } }, 
      columnStyles: { 0: { fontSize: 15 } }, 
      
       margin: { top: 150 },
@@ -124,6 +141,57 @@ private trigger: Subject<any> = new Subject();
   
   
 }
+
+generateA6PDF(){
+  const pdf = new jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: [105, 148], // A6 dimensions in millimeters (width x height)
+  });
+  
+    // Add text to PDF
+    //pdf.text('Hello, this is some text!', 10, 10);
+    const companyLogo = 'assets/images/logo.jpg';
+    pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+    pdf.setFontSize(10);
+    //pdf.setFont('bold');
+    pdf.text('Employee Info', 40, 30);
+
+
+    // Add an image to PDF
+    const imageUrl = 'assets/images/employee.png';
+    //pdf.addImage(imageUrl, 'JPEG', 55, 50, 100, 100); // Parameters: image, format, x, y, width, height
+    pdf.addImage(this.visitorInfoObj.photo, 'JPEG', 35, 35, 40, 40); // Parameters: image, format, x, y, width, height
+
+    const items = [
+      ['Visitor Name', this.visitorInfoObj.name],
+      ['Whom To Meet', this.visitorInfoObj.whomToMeet],
+      ['Reason', this.visitorInfoObj.reason],
+      ['Mobile', this.visitorInfoObj.mobileNumber],
+      ['InTime', this.visitorInfoObj.inTime],
+      ['OutTime', this.visitorInfoObj.outTime]
+      // Add more items here
+    ];
+
+    pdf.setFontSize(8);
+    autoTable(pdf, {
+     columnStyles: { 0: { fontSize: 8 } }, 
+     styles: {fontSize:8},
+      margin: { top: 80 },
+      body: items,
+
+    })
+    
+    pdf.setFontSize(8)
+    pdf.text('**Note - This is an auto generated pass', 30, 130);
+    pdf.text('       *** Do not lose this pass ***',30,135)
+    pdf.output('dataurlnewwindow');
+    //pdf.autoPrint()
+    //pdf.save('generated-pdf.pdf');
+  
+  
+}
+
 
 showButton()
 {
