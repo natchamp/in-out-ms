@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'employee/entry',
     component: EmployeeComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'home',
@@ -40,12 +40,12 @@ const routes: Routes = [
   {
     path: 'visitor/entry',
     component: VisitorComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'material/entry',
     component: MaterialEntryComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'employee/list',

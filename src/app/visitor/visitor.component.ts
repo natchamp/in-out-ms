@@ -155,13 +155,13 @@ generateA6PDF(){
     pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
     pdf.setFontSize(10);
     //pdf.setFont('bold');
-    pdf.text('Employee Info', 40, 30);
+    pdf.text('Visitor Info', 40, 30);
 
 
     // Add an image to PDF
     const imageUrl = 'assets/images/employee.png';
     //pdf.addImage(imageUrl, 'JPEG', 55, 50, 100, 100); // Parameters: image, format, x, y, width, height
-    pdf.addImage(this.visitorInfoObj.photo, 'JPEG', 35, 35, 40, 40); // Parameters: image, format, x, y, width, height
+    pdf.addImage(this.visitorInfoObj.photo, 'JPEG', 30, 35, 40, 40); // Parameters: image, format, x, y, width, height
 
     const items = [
       ['Visitor Name', this.visitorInfoObj.name],

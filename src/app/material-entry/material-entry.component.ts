@@ -43,6 +43,7 @@ export class MaterialEntryComponent {
     //,
     //extra:''
   }
+  selectedImage!: File;
 
   constructor(httpClient: HttpClient, private fb: FormBuilder){
     this.httpClient=httpClient
@@ -50,11 +51,32 @@ export class MaterialEntryComponent {
     this.materialEntryForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       vehicle: ['', [Validators.required, Validators.pattern('^[A-Z]{2} [0-9]{2} [A-Z]{2} [0-9]{4}$')]],
-      materialDoc: ['', [Validators.required]],
+      //materialDoc: ['', [Validators.required]],
       materialDesc: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     });
    }
+
+
+
+  onFileSelected(event: any) {
+    this.selectedImage = event.target.files[0] as File;
+    
+    if (this.selectedImage) {
+      this.getBase64(this.selectedImage).then((base64) => {
+        this.materialInfoObj.materialDocument = base64;
+      });
+    }
+  }
+
+  getBase64(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  }
 
   //ngOnInit():void{}
 
@@ -156,7 +178,7 @@ generatePDF() {
     ['Driver Name', this.materialInfoObj.driverName],
     ['Vehicle Number', this.materialInfoObj.vehicleNumber],
     ['Material Description', this.materialInfoObj.materialDescription],
-    ['Material Document', this.materialInfoObj.materialDocument],
+    //['Material Document', this.materialInfoObj.materialDocument],
     ['Mobile', this.materialInfoObj.mobileNumber],
     ['InTime', this.materialInfoObj.inTime],
     ['OutTime', this.materialInfoObj.outTime]
@@ -187,6 +209,57 @@ generatePDF() {
   //pdf.save('generated-pdf.pdf');
 
 
+}
+
+generateA6PDF(){
+  const pdf = new jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: [105, 148], // A6 dimensions in millimeters (width x height)
+  });
+  
+    // Add text to PDF
+    //pdf.text('Hello, this is some text!', 10, 10);
+    const companyLogo = 'assets/images/logo.jpg';
+    pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+    pdf.setFontSize(10);
+    //pdf.setFont('bold');
+    pdf.text('Material Info', 40, 30);
+
+
+    // Add an image to PDF
+    const imageUrl = 'assets/images/employee.png';
+    //pdf.addImage(imageUrl, 'JPEG', 55, 50, 100, 100); // Parameters: image, format, x, y, width, height
+    pdf.addImage(this.materialInfoObj.photo, 'JPEG', 30, 35, 40, 40); // Parameters: image, format, x, y, width, height
+
+    const items = [
+      ['Driver Name', this.materialInfoObj.driverName],
+    ['Vehicle Number', this.materialInfoObj.vehicleNumber],
+    ['Material Description', this.materialInfoObj.materialDescription],
+    //['Material Document', this.materialInfoObj.materialDocument],
+    ['Mobile', this.materialInfoObj.mobileNumber],
+    ['InTime', this.materialInfoObj.inTime],
+    ['OutTime', this.materialInfoObj.outTime]
+      // Add more items here
+    ];
+
+    pdf.setFontSize(8);
+    autoTable(pdf, {
+     columnStyles: { 0: { fontSize: 8 } }, 
+     styles: {fontSize:8},
+      margin: { top: 80 },
+      body: items,
+
+    })
+    
+    pdf.setFontSize(8)
+    pdf.text('**Note - This is an auto generated pass', 30, 130);
+    pdf.text('       *** Do not lose this pass ***',30,135)
+    pdf.output('dataurlnewwindow');
+    //pdf.autoPrint()
+    //pdf.save('generated-pdf.pdf');
+  
+  
 }
 
 showButton()

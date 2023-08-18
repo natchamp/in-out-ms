@@ -45,7 +45,7 @@
                             </div>
                             
                             <label for="materialDoc">Material Document</label>
-                            <input type="file" class="w-input" maxlength="256" name="materialDoc" data-name="materialDoc"
+                            <input type="file" (change)="onFileSelected($event)" class="w-input" maxlength="256" name="materialDoc" data-name="materialDoc"
                                 placeholder="" id="materialDoc" required="" formControlName="materialDoc" [(ngModel)]="materialInfoObj.materialDocument" />
                             <div class="field-error" *ngIf="materialEntryForm.get('materialDoc')?.invalid && (materialEntryForm.get('materialDoc')?.dirty || materialEntryForm.get('materialDoc')?.touched)">
                                 <div *ngIf="materialEntryForm.get('materialDoc')?.hasError('required')">This field is required.</div>
@@ -95,7 +95,7 @@
                         (click)="onVisitorEntry()" /> -->
                         <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button" [disabled]="materialEntryForm.invalid"
                         (click)="onMaterialEntry()"/>
-                    <button class="submit-button w-button" [disabled]="submitClicked" (click)="generatePDF()">Generate PDF</button>
+                    <button class="submit-button w-button" [disabled]="submitClicked" (click)="generateA6PDF()">Generate PDF</button>
                 </form>
                 <div class="w-form-done">
                     <div>Thank you! Your submission has been received!</div>
