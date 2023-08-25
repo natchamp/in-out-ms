@@ -239,8 +239,9 @@ fullNameValidator(): ValidatorFn {
         ['Reason', this.employeeInfoObj.reason],
         ['Mobile', this.employeeInfoObj.mobileNumber],
         ['Date', this.employeeInfoObj.date],
-        ['InTime', this.employeeInfoObj.inTime],
-        ['OutTime', this.employeeInfoObj.outTime]
+        //['InTime', this.employeeInfoObj.inTime],
+        ['OutTime', this.employeeInfoObj.inTime],
+        //['OutTime', this.employeeInfoObj.outTime]
         // Add more items here
       ];
 
@@ -252,10 +253,12 @@ fullNameValidator(): ValidatorFn {
         body: items,
 
       })
+
+      pdf.text('Employee Sign         HOD Sign', 30, 135);
       
-      pdf.setFontSize(8)
-      pdf.text('**Note - This is an auto generated pass', 30, 130);
-      pdf.text('       *** Do not lose this pass ***',30,135)
+      pdf.setFontSize(5)
+      pdf.text('**Note - This is an auto generated pass', 30, 140);
+     // pdf.text('       *** Do not lose this pass ***',30,145)
       pdf.output('dataurlnewwindow');
       //pdf.autoPrint()
       //pdf.save('generated-pdf.pdf');

@@ -48,11 +48,11 @@ addcategory(){
   this.availableEmployees.forEach(element => {
     element.category='Employee';
     if(element.outTime?.trim().length==0){
-      element.subCategory="IN";
+      element.subCategory="OUT";
       element.isOut=false;
     }
     else{
-      element.subCategory="OUT";
+      element.subCategory="IN";
       element.isOut=true;
   }
   });
@@ -120,7 +120,7 @@ filterEmployees(){
           employee.isOut = true;
         }
         //alert('Visitor Out Successfully...');
-        alert(res.toString());
+        //alert(res.toString());
       },
       error: (err: any) => console.log(err),
     });

@@ -168,8 +168,9 @@ generateA6PDF(){
       ['Whom To Meet', this.visitorInfoObj.whomToMeet],
       ['Reason', this.visitorInfoObj.reason],
       ['Mobile', this.visitorInfoObj.mobileNumber],
+      ['Date', this.visitorInfoObj.date],
       ['InTime', this.visitorInfoObj.inTime],
-      ['OutTime', this.visitorInfoObj.outTime]
+      //['OutTime', this.visitorInfoObj.outTime]
       // Add more items here
     ];
 
@@ -183,8 +184,10 @@ generateA6PDF(){
     })
     
     pdf.setFontSize(8)
-    pdf.text('**Note - This is an auto generated pass', 30, 130);
-    pdf.text('       *** Do not lose this pass ***',30,135)
+    pdf.text('Visitor Sign         Officer Sign       Security Sign', 20, 135);
+    pdf.setFontSize(5)
+    pdf.text('**Note - This is an auto generated pass', 30, 140);
+    //pdf.text('       *** Do not lose this pass ***',30,135)
     pdf.output('dataurlnewwindow');
     //pdf.autoPrint()
     //pdf.save('generated-pdf.pdf');

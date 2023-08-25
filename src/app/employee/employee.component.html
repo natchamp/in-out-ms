@@ -13,7 +13,9 @@
                     <div class="w-row">
                         <div class="column-6 w-col w-col-6 cam-sec">
                             <div class="col-md-12">
+                            <!-- <div class="rounded-webcam"> -->
                                 <webcam [height]="180" [width]="200"  [trigger]="invokeObservable" (imageCapture)="captureImg($event)"></webcam>
+                                <!-- <webcam [height]="180" [width]="200" [trigger]="invokeObservable" (imageCapture)="captureImg($event)"></webcam> -->
                             </div>
                             <div>
                                 <button class="btn-danger" (click)="getSnapshot()">
@@ -21,8 +23,9 @@
                                 </button>
                             </div>
                             <div class="col-md-12">
-                                <!-- <img [src]="webcamImage.imageAsDataUrl" /> -->
-                                <img [src]="employeeInfoObj.photo" />
+                            <!-- <div class="rounded-webcam-img"> -->
+                                <img [src]="webcamImage.imageAsDataUrl" />
+                                <!-- <img [height]="180" [width]="200" [src]="employeeInfoObj.photo" /> -->
                             </div>
                         </div>
                         <div class="column-6 w-col w-col-6">

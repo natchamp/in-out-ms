@@ -238,8 +238,9 @@ generateA6PDF(){
     ['Material Description', this.materialInfoObj.materialDescription],
     //['Material Document', this.materialInfoObj.materialDocument],
     ['Mobile', this.materialInfoObj.mobileNumber],
-    ['InTime', this.materialInfoObj.inTime],
-    ['OutTime', this.materialInfoObj.outTime]
+    ['Date', this.materialInfoObj.date],
+    ['Delivery Time', this.materialInfoObj.inTime],
+    //['OutTime', this.materialInfoObj.outTime]
       // Add more items here
     ];
 
@@ -253,8 +254,10 @@ generateA6PDF(){
     })
     
     pdf.setFontSize(8)
-    pdf.text('**Note - This is an auto generated pass', 30, 130);
-    pdf.text('       *** Do not lose this pass ***',30,135)
+    pdf.text('Driver Sign         Officer Sign       Security Sign', 20, 135);
+    pdf.setFontSize(5)
+    pdf.text('**Note - This is an auto generated pass', 30, 140);
+    //pdf.text('       *** Do not lose this pass ***',30,135)
     pdf.output('dataurlnewwindow');
     //pdf.autoPrint()
     //pdf.save('generated-pdf.pdf');

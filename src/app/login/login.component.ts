@@ -48,13 +48,15 @@ export class LoginComponent {
           if(this.responseMsg.includes("Successful"))
           {
             alert("Login Successfully")
+            this.api.saveUsername(res.toString());
+            this.router.navigateByUrl('/home');
           }else{
           alert(this.responseMsg);
           }
-           this.api.saveUsername(res.toString());
+           
           // let isActive = this.api.getTokenUserInfo()?.active ?? false;
           // if (isActive) 
-          this.router.navigateByUrl('/home');
+          
           // else {
           //   this.responseMsg = 'You are not Active!';
           //   this.api.deleteToken();

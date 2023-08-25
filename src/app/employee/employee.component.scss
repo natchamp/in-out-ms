@@ -5008,7 +5008,30 @@ label{
   background-color: #303030;
 }
 
+
+.rounded-webcam {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  //margin: 20px auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rounded-webcam webcam {
+  width: 100%;
+  height: 100%;
+}
 .field-error{
   color: #ea384c;
   font-size: 12 px;
+}
+
+.rounded-webcam-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  //margin: 20px auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
