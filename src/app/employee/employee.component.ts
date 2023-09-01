@@ -148,7 +148,14 @@ fullNameValidator(): ValidatorFn {
     this.httpClient.post(this.backendService, this.employeeInfoObj).subscribe((data:any)=>{console.log(" Employee Added/n----", data)});
     alert("Employee Added Successfully.....");
     //console.log('Visitor Added', response)
-    
+    this.api.getEmployeeId().subscribe({
+      next: (res: any) => {
+        this.employeeInfoObj.id=res;
+        console.log(res);
+      },
+      error: (err: any) => console.log(err),
+    });
+    console.log(this.employeeInfoObj.id);
     
     //this.httpClient.get('http://localhost:4000/employee/087150f0-db90-4a69-84ea-6fe3f1c3ad2f').subscribe((data: any)=>{console.log("Get Employee", data)})
     
@@ -168,7 +175,7 @@ fullNameValidator(): ValidatorFn {
       pdf.addImage(companyLogo, 'JPEG', 10, 10, 190, 20); // Parameters: image, format, x, y, width, height
       pdf.setFontSize(20);
       //pdf.setFont('bold');
-      pdf.text('Employee Info', 80, 50);
+      pdf.text('Employee Gatepass', 80, 50);
 
 
       // Add an image to PDF
@@ -221,13 +228,15 @@ fullNameValidator(): ValidatorFn {
     });
     
       // Add text to PDF
-      //pdf.text('Hello, this is some text!', 10, 10);
       const companyLogo = 'assets/images/logo.jpg';
-      pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+      //pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+      pdf.setFontSize(18);
+      
+      pdf.text('Innovative Technomics Pvt. Ltd.', 8, 17);
       pdf.setFontSize(10);
       //pdf.setFont('bold');
-      pdf.text('Employee Info', 40, 30);
-
+      pdf.text('Employee Gatepass', 40, 25);
+      pdf.text('No. - '+this.employeeInfoObj.id, 45, 30);
 
       // Add an image to PDF
       const imageUrl = 'assets/images/employee.png';
@@ -257,7 +266,7 @@ fullNameValidator(): ValidatorFn {
       pdf.text('Employee Sign         HOD Sign', 30, 135);
       
       pdf.setFontSize(5)
-      pdf.text('**Note - This is an auto generated pass', 30, 140);
+      pdf.text('        **Note - This is an auto generated pass', 30, 140);
      // pdf.text('       *** Do not lose this pass ***',30,145)
       pdf.output('dataurlnewwindow');
       //pdf.autoPrint()

@@ -15,6 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class MaterialEntryComponent {
   }
   selectedImage!: File;
 
-  constructor(httpClient: HttpClient, private fb: FormBuilder){
+  constructor(httpClient: HttpClient, private fb: FormBuilder, private api: ApiService){
     this.httpClient=httpClient
 
     this.materialEntryForm = this.fb.group({
@@ -91,6 +92,15 @@ export class MaterialEntryComponent {
     console.log("In Time = "+this.materialInfoObj.inTime);
       this.httpClient.post(this.backendService, this.materialInfoObj).subscribe((data:any)=>{console.log(" Material Added/n----", data)});
       alert("Material Added Successfully.....");
+
+      this.api.getMaterialId().subscribe({
+        next: (res: any) => {
+          this.materialInfoObj.id=res;
+          console.log(res);
+        },
+        error: (err: any) => console.log(err),
+      });
+      console.log(this.materialInfoObj.id);
       /*const response = fetch(this.backendService, {
         method: 'POST',
         body: JSON.stringify(this.visitorInfoObj),
@@ -219,12 +229,15 @@ generateA6PDF(){
   });
   
     // Add text to PDF
-    //pdf.text('Hello, this is some text!', 10, 10);
     const companyLogo = 'assets/images/logo.jpg';
-    pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+    //pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+    pdf.setFontSize(18);
+    
+    pdf.text('Innovative Technomics Pvt. Ltd.', 8, 17);
     pdf.setFontSize(10);
     //pdf.setFont('bold');
-    pdf.text('Material Info', 40, 30);
+    pdf.text('Material Gatepass', 40, 25);
+    pdf.text('No. - '+this.materialInfoObj.id, 45, 30);
 
 
     // Add an image to PDF

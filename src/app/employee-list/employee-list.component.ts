@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Book, CategoryBooks, CategoryEmployees, Employee } from '../models/models';
 import { ApiService } from '../services/api.service';
+import autoTable from 'jspdf-autotable';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'employee-list',
@@ -11,6 +13,7 @@ export class EmployeeListComponent {
   availableEmployees: Employee[] = [];
   employeesToDisplay: CategoryEmployees[] = [];
   displayedColumns: string[] = [
+    'id',
     'photo',
     'name',
     'reason',
@@ -19,13 +22,14 @@ export class EmployeeListComponent {
     'intime',
     'outtime',
     'action',
-    'delete'
+    'delete',
+    'print'
   ];
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.api.getAllEmployees().subscribe({
+    this.api.getAllEmployeesLatest().subscribe({
       next: (res: Employee[]) => {
         this.availableEmployees = [];
         console.log(res);
@@ -41,6 +45,10 @@ export class EmployeeListComponent {
       error: (err: any) => console.log(err),
     });
   }
+
+
+
+
 
 addcategory(){
   //for( let visitor of this.availableVisitors){}
@@ -149,5 +157,61 @@ filterEmployees(){
   isAccessBlocked() {
     //let blocked = this.api.getTokenUserInfo()?.blocked ?? true;
     return false;
+  }
+
+  generateA6PDF(employeeInfoObj: Employee){
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: [105, 148], // A6 dimensions in millimeters (width x height)
+    });
+    
+      // Add text to PDF
+      const companyLogo = 'assets/images/logo.jpg';
+      //pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+      pdf.setFontSize(18);
+      
+      pdf.text('Innovative Technomics Pvt. Ltd.', 8, 17);
+      pdf.setFontSize(10);
+      //pdf.setFont('bold');
+      pdf.text('Employee Gatepass', 40, 25);
+      pdf.text('No. - '+employeeInfoObj.id, 45, 30);
+
+
+      // Add an image to PDF
+      const imageUrl = 'assets/images/employee.png';
+      //pdf.addImage(imageUrl, 'JPEG', 55, 50, 100, 100); // Parameters: image, format, x, y, width, height
+      pdf.addImage(employeeInfoObj.photo, 'JPEG', 35, 35, 40, 40); // Parameters: image, format, x, y, width, height
+
+      const items = [
+        ['Employee Name', employeeInfoObj.name],
+        ['Reason', employeeInfoObj.reason],
+        ['Mobile', employeeInfoObj.mobileNumber],
+        ['Date', employeeInfoObj.date],
+        //['InTime', this.employeeInfoObj.inTime],
+        ['OutTime', employeeInfoObj.inTime],
+        //['OutTime', this.employeeInfoObj.outTime]
+        // Add more items here
+      ];
+
+      pdf.setFontSize(8);
+      autoTable(pdf, {
+       columnStyles: { 0: { fontSize: 8 } }, 
+       styles: {fontSize:8},
+        margin: { top: 80 },
+        body: items,
+
+      })
+
+      pdf.text('Employee Sign         HOD Sign', 30, 135);
+      
+      pdf.setFontSize(5)
+      pdf.text('        **Note - This is an auto generated pass', 30, 140);
+     // pdf.text('       *** Do not lose this pass ***',30,145)
+      pdf.output('dataurlnewwindow');
+      //pdf.autoPrint()
+      //pdf.save('generated-pdf.pdf');
+    
+    
   }
 }

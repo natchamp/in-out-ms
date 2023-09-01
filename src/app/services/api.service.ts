@@ -109,6 +109,36 @@ export class ApiService {
     return this.http.get<Employee[]>(this.baseUrl + '/employee/all');
   }
 
+  getAllEmployeesLatest() {
+    return this.http.get<Employee[]>(this.baseUrl + '/employee/latest');
+  }
+
+  getAllMaterialLatest() {
+    return this.http.get<Material[]>(this.baseUrl + '/material/latest');
+  }
+
+  getAllVisitorLatest() {
+    return this.http.get<Visitor[]>(this.baseUrl + '/visitor/latest');
+  }
+
+  getEmployeeId(){
+    return this.http.get(this.baseUrl + '/employee/latestid',{
+      responseType:'text'
+    });
+  }
+
+  getMaterialId(){
+    return this.http.get(this.baseUrl + '/material/latestid',{
+      responseType:'text'
+    });
+  }
+
+  getVisitorId(){
+    return this.http.get(this.baseUrl + '/visitor/latestid',{
+      responseType:'text'
+    });
+  }
+
   outVisitor(visitor: Visitor) {
     // return this.http.patch(this.baseUrl + '/visitor/new' , visitor, {
     //   responseType: 'text',

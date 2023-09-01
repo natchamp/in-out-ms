@@ -4,6 +4,8 @@ import { ApiService } from '../services/api.service';
 
 import { Subject, Observable } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import autoTable from 'jspdf-autotable';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'visitor-list',
@@ -15,6 +17,7 @@ export class VisitorListComponent {
   availableVisitors: Visitor[] = [];
   visitorsToDisplay: CategoryVisitors[] = [];
   displayedColumns: string[] = [
+    'id',
     'photo',
     'name',
     'reason',
@@ -24,13 +27,14 @@ export class VisitorListComponent {
     'intime',
     'outtime',
     'action',
-    'delete'
+    'delete',
+    'print'
   ];
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.api.getAllVisitors().subscribe({
+    this.api.getAllVisitorLatest().subscribe({
       next: (res: Visitor[]) => {
         this.availableVisitors = [];
         console.log(res);
@@ -163,4 +167,61 @@ filterVisitors(){
     //let blocked = this.api.getTokenUserInfo()?.blocked ?? true;
     return false;
   }
+
+  generateA6PDF(visitorInfoObj:Visitor){
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: [105, 148], // A6 dimensions in millimeters (width x height)
+    });
+    
+      // Add text to PDF
+      const companyLogo = 'assets/images/logo.jpg';
+      //pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+      pdf.setFontSize(18);
+      
+      pdf.text('Innovative Technomics Pvt. Ltd.', 8, 17);
+      pdf.setFontSize(10);
+      //pdf.setFont('bold');
+      pdf.text('Visitor Gatepass', 38, 25);
+      pdf.text('No. - '+visitorInfoObj.id, 45, 30);
+  
+  
+      // Add an image to PDF
+      const imageUrl = 'assets/images/employee.png';
+      //pdf.addImage(imageUrl, 'JPEG', 55, 50, 100, 100); // Parameters: image, format, x, y, width, height
+      pdf.addImage(visitorInfoObj.photo, 'JPEG', 30, 35, 40, 40); // Parameters: image, format, x, y, width, height
+  
+      const items = [
+        ['Visitor Name', visitorInfoObj.name],
+        ['Whom To Meet',visitorInfoObj.whomToMeet],
+        ['Reason', visitorInfoObj.reason],
+        ['Mobile', visitorInfoObj.mobileNumber],
+        ['Date', visitorInfoObj.date],
+        ['InTime', visitorInfoObj.inTime],
+        //['OutTime', this.visitorInfoObj.outTime]
+        // Add more items here
+      ];
+  
+      pdf.setFontSize(8);
+      autoTable(pdf, {
+       columnStyles: { 0: { fontSize: 8 } }, 
+       styles: {fontSize:8},
+        margin: { top: 80 },
+        body: items,
+  
+      })
+      
+      pdf.setFontSize(8)
+      pdf.text('Visitor Sign         Officer Sign       Security Sign', 20, 135);
+      pdf.setFontSize(5)
+      pdf.text('**Note - This is an auto generated pass', 30, 140);
+      //pdf.text('       *** Do not lose this pass ***',30,135)
+      pdf.output('dataurlnewwindow');
+      //pdf.autoPrint()
+      //pdf.save('generated-pdf.pdf');
+    
+    
+  }
+  
 }

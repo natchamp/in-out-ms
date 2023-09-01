@@ -15,6 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'visitor',
@@ -29,6 +30,7 @@ export class VisitorComponent implements OnInit{
   visitorEntryForm: FormGroup;
   submitClicked:boolean = true;
   visitorInfoObj:any={
+    id:'',
     name:'',
     reason:'',
     date:'',
@@ -41,7 +43,7 @@ export class VisitorComponent implements OnInit{
     //extra:''
   }
 
-  constructor(httpClient: HttpClient, private fb: FormBuilder){
+  constructor(httpClient: HttpClient, private fb: FormBuilder, private api:ApiService){
     this.httpClient=httpClient
 
     this.visitorEntryForm = this.fb.group({
@@ -64,6 +66,14 @@ export class VisitorComponent implements OnInit{
     console.log("In Time = "+this.visitorInfoObj.inTime);
       this.httpClient.post(this.backendService, this.visitorInfoObj).subscribe((data:any)=>{console.log(" Visitor Added/n----", data)});
       alert("Visitor Added Successfully.....");
+
+      this.api.getVisitorId().subscribe({
+        next: (res: any) => {
+          this.visitorInfoObj.id=res;
+          console.log(res);
+        },
+        error: (err: any) => console.log(err),
+      })
 
   }
 //--------------------------------------
@@ -100,7 +110,7 @@ private trigger: Subject<any> = new Subject();
     pdf.addImage(companyLogo, 'JPEG', 10, 10, 190, 20); // Parameters: image, format, x, y, width, height
     pdf.setFontSize(20);
     //pdf.setFont('bold');
-    pdf.text('Visitor Info', 80, 50);
+    pdf.text('Visitor Gatepass', 80, 50);
 
 
     // Add an image to PDF
@@ -149,13 +159,17 @@ generateA6PDF(){
     format: [105, 148], // A6 dimensions in millimeters (width x height)
   });
   
-    // Add text to PDF
-    //pdf.text('Hello, this is some text!', 10, 10);
-    const companyLogo = 'assets/images/logo.jpg';
-    pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
-    pdf.setFontSize(10);
-    //pdf.setFont('bold');
-    pdf.text('Visitor Info', 40, 30);
+   // Add text to PDF
+   const companyLogo = 'assets/images/logo.jpg';
+   //pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
+   pdf.setFontSize(18);
+   
+   pdf.text('Innovative Technomics Pvt. Ltd.', 8, 17);
+   pdf.setFontSize(10);
+   //pdf.setFont('bold');
+   pdf.text('Visitor Gatepass', 40, 25);
+   pdf.text('No. - '+this.visitorInfoObj.id, 45, 30);
+
 
 
     // Add an image to PDF

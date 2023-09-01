@@ -84,6 +84,7 @@ export interface Material{
   driverName: string;
   vehicleNumber:string;
   materialDescription: string;
+  mobileNumber:string;
   materialDocument:string;
   photo: string;
   inTime:string;
