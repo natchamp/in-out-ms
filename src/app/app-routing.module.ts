@@ -12,6 +12,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
 import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialEntryComponent } from './material-entry/material-entry.component';
+import { MaterialExitComponent } from './material-exit/material-exit.component';
+import { MaterialExitListComponent } from './material-exit-list/material-exit-list.component';
 
 const routes: Routes = [
   {
@@ -63,10 +65,21 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
   },
   {
+    path: 'material/exit',
+    component: MaterialExitComponent,
+    canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'material/exitlist',
+    component: MaterialExitListComponent,
+    canActivate: [AuthenticationGuard],
+  },
+  {
     path: 'users/profile',
     component: ProfileComponent,
     canActivate: [AuthenticationGuard],
   }
+
 ];
 
 @NgModule({

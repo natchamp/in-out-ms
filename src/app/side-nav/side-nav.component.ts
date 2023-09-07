@@ -37,6 +37,14 @@ export class SideNavComponent {
       link: 'material/list',
     },
     {
+      title: 'Material Exit',
+      link: 'material/exit',
+    },
+    {
+      title: 'Material Exit List',
+      link: 'material/exitlist',
+    },
+    {
       title: 'Activity',
       link: 'admin/activity'
     }

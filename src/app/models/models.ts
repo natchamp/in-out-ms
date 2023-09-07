@@ -95,6 +95,22 @@ export interface Material{
   isOut:boolean
 }
 
+
+export interface ExitMaterial{
+  id: string;
+  pickupPersonName: string;
+  materialDescription: string;
+  mobileNumber:string;
+  materialDocument:string;
+  photo: string;
+  outTime:string;
+  date:string;
+  category: string;
+  subCategory: string;
+  isOut:boolean
+}
+
+
 export interface CategoryBooks {
   category: string;
   subCategory: string;
@@ -117,6 +133,12 @@ export interface CategoryMaterials {
   category: string;
   subCategory: string;
   materials: Material[];
+}
+
+export interface CategoryExitMaterials {
+  category: string;
+  subCategory: string;
+  materials: ExitMaterial[];
 }
 
 

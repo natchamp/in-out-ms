@@ -31,6 +31,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
 import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialEntryComponent } from './material-entry/material-entry.component';
+import { MaterialExitComponent } from './material-exit/material-exit.component';
+import { MaterialExitListComponent } from './material-exit-list/material-exit-list.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { MaterialEntryComponent } from './material-entry/material-entry.componen
     VisitorListComponent,
     MaterialListComponent,
     MaterialEntryComponent,
+    MaterialExitComponent,
+    MaterialExitListComponent,
   ],
   imports: [
     BrowserModule,

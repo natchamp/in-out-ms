@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
-import { Book, Category, Order, User, UserType, RegistrationObj, LoginDetails, Visitor, Employee, Material } from '../models/models';
+import { Book, Category, Order, User, UserType, RegistrationObj, LoginDetails, Visitor, Employee, Material, ExitMaterial } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -104,6 +104,10 @@ export class ApiService {
     return this.http.get<Material[]>(this.baseUrl + '/material/all');
   }
 
+  getAllExitMaterials() {
+    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitall');
+  }
+
 
   getAllEmployees() {
     return this.http.get<Employee[]>(this.baseUrl + '/employee/all');
@@ -115,6 +119,10 @@ export class ApiService {
 
   getAllMaterialLatest() {
     return this.http.get<Material[]>(this.baseUrl + '/material/latest');
+  }
+
+  getAllMaterialExitLatest() {
+    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitlatest');
   }
 
   getAllVisitorLatest() {
@@ -129,6 +137,12 @@ export class ApiService {
 
   getMaterialId(){
     return this.http.get(this.baseUrl + '/material/latestid',{
+      responseType:'text'
+    });
+  }
+
+  getExitMaterialId(){
+    return this.http.get(this.baseUrl + '/material/exitlatestid',{
       responseType:'text'
     });
   }
@@ -190,6 +204,14 @@ export class ApiService {
       body: material,
     };
       return this.http.delete(this.baseUrl + "/material/remove", options);
+
+  }
+
+  deleteExitMaterial(material: ExitMaterial) {
+    let options = {
+      body: material,
+    };
+      return this.http.delete(this.baseUrl + "/material/exitremove", options);
 
   }
 
