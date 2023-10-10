@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
-import { Book, Category, Order, User, UserType, RegistrationObj, LoginDetails, Visitor, Employee, Material, ExitMaterial } from '../models/models';
+import { Book, Category, Order, User, UserType, RegistrationObj, LoginDetails, Visitor, Employee, Material, ExitMaterial, VisitorExport } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -119,6 +119,10 @@ export class ApiService {
 
   getAllMaterialLatest() {
     return this.http.get<Material[]>(this.baseUrl + '/material/latest');
+  }
+
+  getAllMaterialExit() {
+    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitall');
   }
 
   getAllMaterialExitLatest() {

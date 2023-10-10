@@ -14,6 +14,7 @@ import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialEntryComponent } from './material-entry/material-entry.component';
 import { MaterialExitComponent } from './material-exit/material-exit.component';
 import { MaterialExitListComponent } from './material-exit-list/material-exit-list.component';
+import { ActivityComponent } from './activity/activity.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,11 @@ const routes: Routes = [
   {
     path: 'users/profile',
     component: ProfileComponent,
+    canActivate: [AuthenticationGuard],
+  },
+  {
+    path: 'activity',
+    component: ActivityComponent,
     canActivate: [AuthenticationGuard],
   }
 

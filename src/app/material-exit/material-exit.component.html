@@ -65,6 +65,15 @@
                                 <div *ngIf="materialExitForm.get('materialDesc')?.hasError('pattern')">Invalid format.</div>
                                 <!-- Add more error conditions as needed -->
                             </div>
+
+                            <label for="vehicle">Vehicle Number</label>
+                            <input type="text" class="w-input" maxlength="256" name="vehicle" data-name="vehicle"
+                                placeholder="" id="vehicle" formControlName="vehicle" [(ngModel)]="materialExitInfoObj.vehicleNumber" required="" />
+                            <div class="field-error" *ngIf="materialExitForm.get('vehicle')?.invalid && (materialExitForm.get('vehicle')?.dirty || materialExitForm.get('vehicle')?.touched)">
+                                <div *ngIf="materialExitForm.get('vehicle')?.hasError('required')">This field is required.</div>
+                                <div *ngIf="materialExitForm.get('vehicle')?.hasError('pattern')">Invalid format.</div>
+                                <!-- Add more error conditions as needed -->
+                            </div>
                         </div>
                     </div>
                     <!-- <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button"

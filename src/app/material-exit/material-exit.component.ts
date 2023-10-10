@@ -37,6 +37,7 @@ export class MaterialExitComponent {
     inTime:'',
     outTime:'',
     mobileNumber:'',
+    vehicleNumber:'',
     materialDescription:'',
     materialDocument:'',
     photo:[]
@@ -52,6 +53,7 @@ export class MaterialExitComponent {
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       materialDesc: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      vehicle: ['', [Validators.required, Validators.pattern('^[A-Z]{2} [0-9]{2} [A-Z]{2} [0-9]{4}$')]]
     });
    }
 
@@ -152,6 +154,7 @@ generateA6PDF(){
 
     const items = [
       ['Pickup Person', this.materialExitInfoObj.pickupPersonName],
+      ['Vehicle Number', this.materialExitInfoObj.vehicleNumber],
       ['Mobile', this.materialExitInfoObj.mobileNumber],
     ['Material Description', this.materialExitInfoObj.materialDescription],
     ['Date', this.materialExitInfoObj.date],

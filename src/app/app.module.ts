@@ -33,6 +33,7 @@ import { MaterialListComponent } from './material-list/material-list.component';
 import { MaterialEntryComponent } from './material-entry/material-entry.component';
 import { MaterialExitComponent } from './material-exit/material-exit.component';
 import { MaterialExitListComponent } from './material-exit-list/material-exit-list.component';
+import { ActivityComponent } from './activity/activity.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MaterialExitListComponent } from './material-exit-list/material-exit-li
     MaterialEntryComponent,
     MaterialExitComponent,
     MaterialExitListComponent,
+    ActivityComponent,
   ],
   imports: [
     BrowserModule,

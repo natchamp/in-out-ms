@@ -65,6 +65,21 @@ export interface Visitor{
   isOut:boolean
 }
 
+export interface VisitorExport{
+  id: string;
+  name: string;
+  mobileNumber:string;
+  reason: string;
+  whomToMeet:string;
+  //photo: string;
+  inTime:string;
+  outTime:string;
+  date:string;
+  category: string;
+  subCategory: string;
+  isOut:boolean
+}
+
 export interface Employee{
   id: string;
   name: string;
@@ -101,6 +116,7 @@ export interface ExitMaterial{
   pickupPersonName: string;
   materialDescription: string;
   mobileNumber:string;
+  vehicleNumber:string;
   materialDocument:string;
   photo: string;
   outTime:string;

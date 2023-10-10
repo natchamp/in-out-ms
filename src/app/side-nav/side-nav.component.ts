@@ -46,7 +46,7 @@ export class SideNavComponent {
     },
     {
       title: 'Activity',
-      link: 'admin/activity'
+      link: 'activity'
     }
   ];
 }

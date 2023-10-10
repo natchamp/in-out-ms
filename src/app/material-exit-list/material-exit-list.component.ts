@@ -19,6 +19,8 @@ export class MaterialExitListComponent {
     'id',
     'pickupPersonPhoto',
     'pickupPersonName',
+    'vehicleNumber',
+    'mobileNumber',
     'materialDescription',
     'materialDocument',
     "date",
@@ -189,6 +191,7 @@ filterMaterials(){
 
     const items = [
       ['Pickup Person', materialInfoObj.pickupPersonName],
+      ['Vehicle Number', materialInfoObj.vehicleNumber],
       ['Mobile', materialInfoObj.mobileNumber],
     ['Material Description', materialInfoObj.materialDescription],
     ['Date', materialInfoObj.date],

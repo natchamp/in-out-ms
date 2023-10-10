@@ -34,42 +34,28 @@
       <div class="div-block">
         <div class="w-row">
           <!---------------------------->
-          <div class="column-2 w-col w-col-6"><img
-            src="assets/images/employee.png"
-            loading="lazy" width="200" height="150" alt="" class="image-3" /><a routerLink="/employee/entry" class="w-button">Employee
-            Entry</a></div>
+          <div class="column-2 w-col w-col-6">
+            <img src="assets/images/employee.png" loading="lazy" width="200" height="150" alt="" class="image-3" />
+            <!--<a routerLink="/employee/entry" class="w-button">Export Employee Data</a>-->
+                <button class="w-button" (click)="getEmployeeData()">Export Employee Data</button> 
+          </div>
           <!------------------------------->
-          <div class="column-2 w-col w-col-6"><img
-              src="assets/images/4.png"
-              loading="lazy" width="200" height="150" alt="" class="image-3" /><a routerLink="/visitor/entry" class="w-button">Visitor
-              Entry</a></div>
-          <div class="column-4 w-col w-col-6"><img
-              src="assets/images/download.png"
-              loading="lazy" width="200" height="150" alt="" /><a routerLink="/material/entry" class="w-button">Material Entry</a></div>
+          <div class="column-2 w-col w-col-6">
+            <img src="assets/images/4.png" loading="lazy" width="200" height="150" alt="" class="image-3" />
+            <!-- <a routerLink="/visitor/entry" class="w-button">Export Visitor Data</a> -->
+            <button class="w-button" (click)="getVisitorData()">Export Visitor Data</button> 
+          </div>
+          <div class="column-4 w-col w-col-6">
+            <img src="assets/images/download.png" loading="lazy" width="200" height="150" alt="" />
+            <!-- <a routerLink="/material/entry" class="w-button">Export Material Data</a> -->
+            <button class="w-button" (click)="getMaterialData()">Export Material Data</button> 
+          </div>
           <!--Material Exit-->
-          <div class="column-4 w-col w-col-6"><img
-                src="assets/images/deliverytruck.png"
-                loading="lazy" width="180" height="150" alt="" /><a routerLink="/material/exit" class="w-button">Material Exit Entry</a></div>
-        </div>
-        
-      </div>
-      <div class="div-block">
-        <div class="w-row">
-          <!--------------------------------------->
-          <div class="column-2 w-col w-col-6"><img src="assets/images/employeeList.png"
-            loading="lazy" width="200" height="150" alt="" class="image-3" /><a routerLink="/employee/list" class="w-button">Employee
-            List</a></div>
-          <!------------------------------------->
-          <div class="column-2 w-col w-col-6"><img src="assets/images/2.png"
-              loading="lazy" width="200" height="150" alt="" class="image-3" /><a routerLink="/visitor/list" class="w-button">Visitor
-              List</a></div>
-          <div class="column-4 w-col w-col-6"><img
-              src="assets/images/3.png"
-              loading="lazy" width="200" height="150" alt="" /><a routerLink="/material/list" class="w-button">Material List</a></div>
-          <!--Material Exit List-->
-          <div class="column-4 w-col w-col-6"><img
-                src="assets/images/exitlist2.png"
-                loading="lazy" width="180" height="150" alt="" /><a routerLink="/material/exitlist" class="w-button">Material Exit List</a></div>
+          <div class="column-4 w-col w-col-6">
+            <img src="assets/images/deliverytruck.png" loading="lazy" width="180" height="150" alt="" />
+            <!-- <a routerLink="/material/exit" class="w-button">Export Exit Material Data</a> -->
+            <button class="w-button" (click)="getMaterialExitData()">Export Exit Material Data</button> 
+          </div>
         </div>
       </div>
     </section>
