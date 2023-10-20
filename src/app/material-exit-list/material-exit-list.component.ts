@@ -172,15 +172,16 @@ filterMaterials(){
       format: [105, 148], // A6 dimensions in millimeters (width x height)
     });
     
+    pdf.setFont("Helvetica",'bold');
        // Add text to PDF
     const companyLogo = 'assets/images/logo.jpg';
     //pdf.addImage(companyLogo, 'JPEG', 10, 10, 80, 10); // Parameters: image, format, x, y, width, height
     pdf.setFontSize(18);
     
-    pdf.text('Innovative Technomics Pvt. Ltd.', 8, 17);
-    pdf.setFontSize(10);
+    pdf.text('Innovative Technomics Pvt. Ltd.', 5, 17);
+    pdf.setFontSize(12);
     //pdf.setFont('bold');
-    pdf.text('Material Exit Gatepass', 32, 25);
+    pdf.text('Material Exit Gatepass', 28, 25);
     pdf.text('No. - '+materialInfoObj.id, 45, 30);
 
 
@@ -199,19 +200,20 @@ filterMaterials(){
       // Add more items here
     ];
 
-    pdf.setFontSize(8);
+    pdf.setFontSize(10);
     autoTable(pdf, {
-     columnStyles: { 0: { fontSize: 8 } }, 
-     styles: {fontSize:8},
+     columnStyles: { 0: { fontSize: 12 } }, 
+     styles: {fontSize:12,fontStyle: 'bold',textColor: [0,0,0]},
       margin: { top: 80 },
       body: items,
+      theme: 'plain',
 
     })
     
-    pdf.setFontSize(8)
-    pdf.text('Officer Sign            Security Sign', 30, 135);
+    pdf.setFontSize(12)
+    pdf.text('Officer Sign            Security Sign', 20, 145);
     pdf.setFontSize(5)
-    pdf.text('**Note - This is an auto generated pass', 35, 140);
+    //pdf.text('**Note - This is an auto generated pass', 35, 140);
     //pdf.text('       *** Do not lose this pass ***',30,135)
     pdf.output('dataurlnewwindow');
     //pdf.autoPrint()

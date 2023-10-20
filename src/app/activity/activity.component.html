@@ -29,10 +29,24 @@
 
 <body>
 
+
+
   <div class="w-layout-blockcontainer container-3 w-container">
     <section class="wf-section">
       <div class="div-block">
         <div class="w-row">
+           <!---------------------------->
+           <div class="column-2 w-col w-col-6">
+            <label for="currDate">Select Start Date:</label>
+            <input type="date" id="currDate" [(ngModel)]="currDate" />
+          </div>
+          <!------------------------------->
+           <!---------------------------->
+           <div class="column-2 w-col w-col-6">
+            <label for="yestDate">Select End Date:</label>
+            <input type="date" id="yestDate" [(ngModel)]="yestDate" />
+          </div>
+          <!------------------------------->
           <!---------------------------->
           <div class="column-2 w-col w-col-6">
             <img src="assets/images/employee.png" loading="lazy" width="200" height="150" alt="" class="image-3" />

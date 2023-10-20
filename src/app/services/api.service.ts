@@ -96,21 +96,21 @@ export class ApiService {
     return this.http.get<Book[]>(this.baseUrl + 'GetAllBooks');
   }
 
-  getAllVisitors() {
-    return this.http.get<Visitor[]>(this.baseUrl + '/visitor/all');
+  getAllVisitors(params:HttpParams) {
+    return this.http.get<Visitor[]>(this.baseUrl + '/visitor/all', {params});
   }
 
-  getAllMaterials() {
-    return this.http.get<Material[]>(this.baseUrl + '/material/all');
+  getAllMaterials(params:HttpParams) {
+    return this.http.get<Material[]>(this.baseUrl + '/material/all', {params});
   }
 
-  getAllExitMaterials() {
-    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitall');
+  getAllExitMaterials(params:HttpParams) {
+    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitall', {params});
   }
 
 
-  getAllEmployees() {
-    return this.http.get<Employee[]>(this.baseUrl + '/employee/all');
+  getAllEmployees(params:HttpParams) {
+    return this.http.get<Employee[]>(this.baseUrl + '/employee/all', {params});
   }
 
   getAllEmployeesLatest() {
@@ -121,8 +121,8 @@ export class ApiService {
     return this.http.get<Material[]>(this.baseUrl + '/material/latest');
   }
 
-  getAllMaterialExit() {
-    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitall');
+  getAllMaterialExit(params:HttpParams) {
+    return this.http.get<ExitMaterial[]>(this.baseUrl + '/material/exitall', {params});
   }
 
   getAllMaterialExitLatest() {
